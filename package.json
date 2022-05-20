@@ -1,0 +1,24 @@
+{
+  "name": "alunos-crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinraafael/alunos-crud-nodejs.git"
+  },
+  "author": "kevin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevinraafael/alunos-crud-nodejs/issues"
+  },
+  "homepage": "https://github.com/kevinraafael/alunos-crud-nodejs#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "sequelize": "^6.19.2",
+    "sqlite3": "^5.0.8"
+  }
+}
