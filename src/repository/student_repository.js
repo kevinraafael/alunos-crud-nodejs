@@ -1,6 +1,6 @@
 const aluno = require('../models/aluno');
 const repository = {
-    getAll: async () => await user.findAll(),
+    getAll: async () => await aluno.findAll(),
 
     create: async ({
         rga,
@@ -18,6 +18,42 @@ const repository = {
             return newUser;
         } catch (e) {
             console.log("Erro no create Repository", e);
+        }
+    },
+    findById: async (id) => await aluno.findByPk(id),
+    delete: async (id) => {
+        try {
+            const destroy = await aluno.destroy({
+                where: {
+                    id,
+                },
+            });
+
+            return !!destroy;
+        } catch (e) {
+            return false;
+        }
+    },
+    update: async (id, { rga, situacao, curso, nome }) => {
+        try {
+            const update = await aluno.update(
+                {
+                    rga,
+                    situacao,
+                    curso,
+                    nome,
+                },
+                {
+                    where: {
+                        id,
+                    },
+                }
+            );
+
+            return !!update[0];
+        } catch (e) {
+            console.log("Erro no update repository", e);
+            return false;
         }
     },
 }
