@@ -3,7 +3,7 @@ const express = require("express");
 
 const app = express();
 
-const router = require("express").Router();
+
 app.use(express.json());
 app.use("/", require("./src/routes/student_route"));
 
