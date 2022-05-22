@@ -67,9 +67,52 @@ const resources = {
             res.send();
         } catch (e) {
             console.log(e);
-            res.status(400).send({ e: e.message, message: "Erro no update" });
+            res.status(405).send({ e: e.message, message: "Erro no update" });
             return false;
         }
     },
+    inexistingRouterPutOrDelete: async (req, res) => {
+        try {
+            const hasUser = await studentRepostory.findById(id);
+            const userUpdated = await studentRepostory.update(id, req.body);
+        } catch (e) {
+            res.status(405).send({ e: e.message, message: "Endpoint Inexistente , caso queira deletar ou atualizar um usuário usar o seguinte exemplo alunos/id." });
+
+        }
+
+    },
+    inexistingRouterPost: async (req, res) => {
+        try {
+            const hasUser = await studentRepostory.findById(id);
+            const userUpdated = await studentRepostory.update(id, req.body);
+        } catch (e) {
+            res.status(405).send({ e: e.message, message: "Endpoint Inexistente , caso queira criar um usuário usar o seguinte exemplo POST alunos." });
+
+        }
+
+    },
+    getOneStudent: async (req, res) => {
+        const { id } = req.params;
+
+        try {
+            const student = await studentRepostory.findById(id);
+
+            if (!student) {
+                throw new Error("Esse usuário não existe.");
+            }
+
+            const studentFinded = await studentRepostory.getOne(id);
+
+            /*  if (!studentFinded) {
+                 throw new Error("Erro ao encontrar.");
+             } */
+
+            res.send({ studentFinded });
+        } catch (e) {
+            console.log(e);
+            res.status(404).send({ e: e.message });
+            return false;
+        }
+    }
 }
 module.exports = resources;

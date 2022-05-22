@@ -1,12 +1,25 @@
 const aluno = require('../models/aluno');
 const repository = {
     getAll: async () => await aluno.findAll(),
+    getOne: async (id) => {
+        try {
+            const findStudent = await aluno.findAll({
+                where: {
+                    id,
+                },
+            });
 
+            return findStudent;
+        } catch (e) {
+            return false;
+        }
+    },
     create: async ({
         rga,
         situacao,
         curso,
         nome,
+
     }) => {
         try {
             const newUser = await aluno.create({
@@ -14,10 +27,11 @@ const repository = {
                 situacao: situacao,
                 curso: curso,
                 nome: nome,
+
             });
             return newUser;
         } catch (e) {
-            console.log("Erro no create Repository", e);
+            console.log("Erro encontrado no Create Repository", e);
         }
     },
     findById: async (id) => await aluno.findByPk(id),

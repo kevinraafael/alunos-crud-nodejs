@@ -24,8 +24,6 @@ const Aluno = database.define('aluno', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    registrado_em: {
-        type: Sequelize.DATE
-    }
+
 })
 module.exports = Aluno;

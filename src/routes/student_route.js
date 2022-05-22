@@ -1,13 +1,20 @@
 const router = require("express").Router();
+const validation = require("../validations/studentValidation");
+const intercept = require("../validations/intercept");
 
 const studentController = require('../controller/student_controller');
 
-router.get("/students", studentController.getAll);
-router.post("/students", studentController.create);
+router.get("/alunos", studentController.getAll);
+router.get("/alunos/:id", studentController.getOneStudent);
+router.post("/alunos", validation.create(), intercept, studentController.create);
 
 router.delete(
-    "/students/:id",
+    "/alunos/:id",
     studentController.delete
 );
-router.put("/students/:id", studentController.update);
+router.put("/alunos/:id", studentController.update);
+
+router.put("/alunos", intercept, studentController.inexistingRouterPutOrDelete);
+router.delete("/alunos", intercept, studentController.inexistingRouterPutOrDelete);
+router.post("/alunos/:id", intercept, studentController.inexistingRouterPost);
 module.exports = router;
